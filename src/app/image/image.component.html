@@ -1,0 +1,21 @@
+<div class="cont d-flex justify-content-center align-items-center flex-column">
+
+  <div class="custom-file" >
+      <label class="custom-file-label">Select File</label>
+      <input type="file" class="custom-file-input" (change)="fileChange($event)">
+
+  </div>
+
+  <div *ngIf="loading">
+      <img src="./assets/spinners/Spinner.gif">
+  </div>
+  <div *ngIf="imgSrc">
+    <img src="{{ imgSrc }}" width="15%" height="15%" #img>
+  </div>
+</div>
+
+<div class="list-group">
+      <div class="list-group-item" *ngFor="let item of predictions">
+          {{item.className}} - {{item.probability | percent}}
+      </div>
+  </div>
