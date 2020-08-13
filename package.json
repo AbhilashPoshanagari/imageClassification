@@ -22,6 +22,7 @@
     "@tensorflow-models/mobilenet": "^2.0.4",
     "@tensorflow/tfjs": "^1.2.11",
     "@types/webgl2": "0.0.5",
+    "angular-cli-ghpages": "^0.6.2",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
