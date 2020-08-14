@@ -1,9 +1,9 @@
-<video autoplay muted width="300px" height="300px" #video></video>
-<div *ngIf="loading">
+<div class="wrap2" cdkDrag>
+<video autoplay muted width="400px" height="400px" #video></video>
+<div *ngIf="loading" class = "loading">
     <img src="./assets/spinners/Spinner.gif">
 </div>
-<div class="list-group">
-      <div class="list-group-item" *ngFor="let item of predictions">
+      <div *ngFor="let item of predictions">
           {{item.className}} - {{item.probability | percent}}
       </div>
-  </div>
+</div>
