@@ -52,6 +52,9 @@ import { ImageComponent } from './image/image.component';
 import { VideoComponent } from './video/video.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { PwaService } from './services/pwa.service';
 
 @NgModule({
   declarations: [
@@ -109,9 +112,12 @@ import { HeaderComponent } from './header/header.component';
     OverlayModule,
     PortalModule,
     ScrollingModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production })
   ],
-  providers: [],
+  providers: [
+    PwaService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PwaService } from '../services/pwa.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor( public pwaService: PwaService ) { }
 
   ngOnInit(): void {
   }
 
+  installPwa(): void {
+  this.pwaService.promptEvent.prompt();
+    }
 }

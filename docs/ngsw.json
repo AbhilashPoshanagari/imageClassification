@@ -1,0 +1,84 @@
+{
+  "configVersion": 1,
+  "timestamp": 1597488670984,
+  "index": "https://abhilashposhanagari.github.io/imageclassification/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "https://abhilashposhanagari.github.io/imageclassification/favicon.ico",
+        "https://abhilashposhanagari.github.io/imageclassification/index.html",
+        "https://abhilashposhanagari.github.io/imageclassification/main.680708561b3960773b1c.js",
+        "https://abhilashposhanagari.github.io/imageclassification/manifest.webmanifest",
+        "https://abhilashposhanagari.github.io/imageclassification/polyfills.0954fd1e7a644cf147d5.js",
+        "https://abhilashposhanagari.github.io/imageclassification/runtime.e227d1a0e31cbccbf8ec.js",
+        "https://abhilashposhanagari.github.io/imageclassification/styles.8eee1917cf4ddc35fe4b.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "https://abhilashposhanagari.github.io/imageclassification/assets/icons/icon-128x128.png",
+        "https://abhilashposhanagari.github.io/imageclassification/assets/icons/icon-144x144.png",
+        "https://abhilashposhanagari.github.io/imageclassification/assets/icons/icon-152x152.png",
+        "https://abhilashposhanagari.github.io/imageclassification/assets/icons/icon-192x192.png",
+        "https://abhilashposhanagari.github.io/imageclassification/assets/icons/icon-384x384.png",
+        "https://abhilashposhanagari.github.io/imageclassification/assets/icons/icon-512x512.png",
+        "https://abhilashposhanagari.github.io/imageclassification/assets/icons/icon-72x72.png",
+        "https://abhilashposhanagari.github.io/imageclassification/assets/icons/icon-96x96.png",
+        "https://abhilashposhanagari.github.io/imageclassification/assets/spinners/BeanEater.gif",
+        "https://abhilashposhanagari.github.io/imageclassification/assets/spinners/Spinner.gif"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "https://abhilashposhanagari.github.io/imageclassification/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "https://abhilashposhanagari.github.io/imageclassification/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "https://abhilashposhanagari.github.io/imageclassification/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "https://abhilashposhanagari.github.io/imageclassification/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "https://abhilashposhanagari.github.io/imageclassification/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "https://abhilashposhanagari.github.io/imageclassification/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "https://abhilashposhanagari.github.io/imageclassification/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "https://abhilashposhanagari.github.io/imageclassification/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "https://abhilashposhanagari.github.io/imageclassification/assets/spinners/BeanEater.gif": "65ddfd7d5e5156ab4f487473761d32274c584450",
+    "https://abhilashposhanagari.github.io/imageclassification/assets/spinners/Spinner.gif": "44e68b074b323fd268c5dff0f52cf362924ab876",
+    "https://abhilashposhanagari.github.io/imageclassification/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
+    "https://abhilashposhanagari.github.io/imageclassification/index.html": "8acaf74c818d08fe66022781c6c01a7076c90a61",
+    "https://abhilashposhanagari.github.io/imageclassification/main.680708561b3960773b1c.js": "18aa81c8eadb2275f2f00edaf007ea0b483ba8c1",
+    "https://abhilashposhanagari.github.io/imageclassification/manifest.webmanifest": "15017554f48ca923c6894da8a3a91dad27a092e7",
+    "https://abhilashposhanagari.github.io/imageclassification/polyfills.0954fd1e7a644cf147d5.js": "8cc2e0294a74eaf5277f53644f7fcb6ab95472c6",
+    "https://abhilashposhanagari.github.io/imageclassification/runtime.e227d1a0e31cbccbf8ec.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "https://abhilashposhanagari.github.io/imageclassification/styles.8eee1917cf4ddc35fe4b.css": "9564eff37a032c9287b5dee69479c716ffd8de96"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}

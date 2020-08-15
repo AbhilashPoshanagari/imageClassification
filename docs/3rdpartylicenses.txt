@@ -91,6 +91,9 @@ MIT
 @angular/router
 MIT
 
+@angular/service-worker
+MIT
+
 @tensorflow-models/mobilenet
 Apache-2.0
 

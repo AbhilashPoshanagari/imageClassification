@@ -12,7 +12,7 @@ export class ImageComponent implements OnInit {
   loading: boolean;
   imgSrc: any;
   predictions: any;
-  constructor() { }
+  constructor(  ) { }
 
   async ngOnInit() {
     this.loading = true;
@@ -20,6 +20,8 @@ export class ImageComponent implements OnInit {
     console.log("model : ",this.model);
     this.loading = false;
   }
+
+
 
   async fileChange(event) {
     const file = event.target.files[0];
