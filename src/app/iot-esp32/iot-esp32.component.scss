@@ -38,8 +38,16 @@
   // height: 400px;
   transform: translate(-50%, -50%);
 }
+.wrap-dashboard2{
+  width: 50%;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  // height: 400px;
+  transform: translate(-50%, -50%);
+}
 .wrap2-dashboard{
-  margin-top: 14%;
+  margin-top: 12%;
   position: absolute;
   top: 40%;
   left: 19%;
@@ -117,4 +125,26 @@ body{
   top: 40%;
   left: 50%;
   color: #2556da;
+}
+
+.connected{
+  color: #2556da;
+}
+.disconnected{
+  color:#ec550f;
+}
+
+mwl-gauge.two {
+}
+mwl-gauge.two > .gauge > .dial {
+  stroke: #334455;
+  stroke-width: 10;
+}
+mwl-gauge.two > .gauge > .value {
+  stroke: orange;
+  stroke-dasharray: none;
+  stroke-width: 13;
+}
+mwl-gauge.two > .gauge > .value-text {
+  fill: orange;
 }

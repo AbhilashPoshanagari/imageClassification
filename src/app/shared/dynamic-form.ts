@@ -30,3 +30,13 @@ interface JsonFormValidators {
   export interface JsonFormData {
     controls: JsonFormControls[];
   }
+
+  export interface IBMConfig {
+    orgId: string;
+     api_key: string; 
+     auth_token: string;
+     device_type: string; 
+     device_id: string; 
+     subscribe_mon: string; 
+     subscribe_evt: string
+  }

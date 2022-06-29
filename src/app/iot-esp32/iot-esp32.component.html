@@ -1,4 +1,4 @@
-<div *ngIf="!isConfigured" class="cont d-flex justify-content-center align-items-center flex-column">
+<div *ngIf="!isConfigured && !loading" class="cont d-flex justify-content-center align-items-center flex-column">
   <div class="wrap">
    <div class="search">
       <input type="file" class="searchTerm" (change)="fileChange($event)">
@@ -13,25 +13,43 @@
 <div *ngIf="isConfigured" class="body">
   <mat-card class="wrap-dashboard">
     <mat-card-title-group>
-      <mat-card-title>Iot Dashboard</mat-card-title>
+      <mat-card-title>IBM Watson Iot  Dashboard 
+        <span *ngIf="deviceState === 'Connect'" class="connected"> {{ deviceState }}</span> 
+        <span *ngIf="deviceState === 'Disconnect'" class="disconnected"> {{ deviceState }}</span> 
+         </mat-card-title>
+
       <mat-card-subtitle>Esp32  -- {{PotentiameterReading}}</mat-card-subtitle>
-      <mat-slide-toggle (click)="onPublish()" [checked]="isChecked"></mat-slide-toggle>
+      <mat-slide-toggle [(ngModel)]="isChecked" (change)="onPublish($event)" [checked]="isChecked"></mat-slide-toggle>
     </mat-card-title-group>
-    <mat-card-content>        
+    <mat-card-content>
+      <mwl-gauge
+      class="two"
+      [max]="100"
+      [dialStartAngle]="180"
+      [dialEndAngle]="0"
+      [value]="PotentiameterReading"
+      [animated]="true"
+      [animationDuration]="2"
+    >
+    </mwl-gauge>
     </mat-card-content>
   </mat-card>
   </div>
 
-  <div *ngIf="!isConfigured" class="body">
+  <div *ngIf="!isConfigured && !loading" class="body">
     <mat-card class="wrap-dashboard">
       <mat-card-title-group>
-        <mat-card-title>IBM Wotson Iot Form</mat-card-title>
+        <mat-card-title>IBM Watson Iot Form</mat-card-title>
       </mat-card-title-group>
       <mat-card-content>
-          <app-json-forms [jsonDynamicForm]="dynamicForm" (formValues)="connectMQTT($event)"></app-json-forms>
+          <app-json-forms [ibmConfig]="ibmConfig" [jsonDynamicForm]="dynamicForm" (formValues)="connectMQTT($event)"></app-json-forms>
       </mat-card-content>
     </mat-card>
     </div>
+
+    <div *ngIf="loading" class="wrap-dashboard">
+      <img src="./assets/spinners/Spinner.gif">
+  </div>
     
 
 

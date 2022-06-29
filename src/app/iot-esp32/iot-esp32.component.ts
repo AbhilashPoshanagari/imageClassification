@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { IBMConfig } from '../shared/dynamic-form';
 
 declare var Paho;
 
@@ -11,6 +12,8 @@ interface IotOrgForm {
   TOKEN: string;  
   TOPIC: string;
 }
+
+
 
 @Component({
   selector: 'app-iot-esp32',
@@ -39,6 +42,9 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
   dynamicForm: any;
   configFile: any = {};
   isConfigured: boolean = false;
+  deviceState: string = '';
+  ibmConfig: IBMConfig = {orgId: '', api_key: '', auth_token: '', device_type: '', device_id: '', subscribe_mon: '', subscribe_evt: ''};
+  loading: boolean;
   constructor( private ngZone: NgZone,
               private http: HttpClient ) { 
         }
@@ -48,8 +54,13 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.getForm(this.ibmConfig);
+  }
+
+  getForm(ibmconfig){
     this.http.get('./assets/iotIBMOrgForm.json').subscribe((res) => {
       this.dynamicForm = res;
+      this.ibmConfig = ibmconfig;
     }, err => console.log("Error : ", err));
   }
 
@@ -60,7 +71,6 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
           alert(key + ' is missing please check');
           return;
         }
-        
     }
     this.ORG = orgConfig.orgId;
     this.DEVICE_TYPE = orgConfig.device_type;
@@ -74,6 +84,7 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
       port: 1883,
       clientId: "a:" + this.ORG + ":" +Math.random().toString(16).substr(2, 8)
     };
+    this.loading = true;
             // Create a client instance
       this.mqttClient = new Paho.MQTT.Client(this.MQTT_CONFIG.host, Number(this.MQTT_CONFIG.port), this.MQTT_CONFIG.clientId);
         //Connect Options
@@ -103,6 +114,11 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
             that.ngZone.run(() => {
               let changeFormat = JSON.parse(message.payloadString);
               that.PotentiameterReading = parseInt(changeFormat);
+              if(changeFormat && changeFormat['Action']){
+                that.deviceState = changeFormat['Action'];
+                console.log('client connected : ', changeFormat);
+                console.log('client connected : ', that.deviceState);
+              }
             });
           }
   }
@@ -112,33 +128,33 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
     // console.log("onConnect");
     // this.mqttClient.subscribe("iot-2/evt/status/fmt/string");
     this.isConfigured = true;
+    this.loading = false;
         this.mqttClient.subscribe(this.monTopic);
         this.mqttClient.subscribe(this.eventTopic);
   }
 
   onFailure(e) { 
+    this.isConfigured = false;
+    this.loading = false;
     console.log("MQTT connection failed at " + Date.now() + "\nerror: " + e.errorCode + " : " + e.errorMessage);
   }
 
-  onPublish(){
+  onPublish(ev){
     //Send your message (also possible to serialize it as JSON or protobuf or just use a string, no limitations)
     if(this.isConfigured && this.mqttClient.isConnected()){
-        if(this.isChecked){
-          this.isChecked = false;
-          var message = new Paho.MQTT.Message('0');      // "iot-2/type/esp32_Testing/id/esp32_testing2/evt/blink/fmt/string"
+        if(!this.isChecked){
+          var message = new Paho.MQTT.Message('0');
         }
         else{
-          this.isChecked = true;
-          var message = new Paho.MQTT.Message('1');      // "iot-2/type/esp32_Testing/id/esp32_testing2/evt/blink/fmt/string"
+          var message = new Paho.MQTT.Message('1');
         }
         message.destinationName = "iot-2/type/esp32_Testing/id/esp32_testing2/evt/blink/fmt/string";
-        // message.qos = 0;
         this.mqttClient.send(message);
+
     }
     else {
       alert("MQTT connection failed!");
     }
-    
   }
 
   async fileChange(event) {
@@ -148,7 +164,8 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
       reader.readAsText(file, "UTF-8");
       reader.onload = (res: any) => {
       this.configFile = JSON.parse(res.target.result.toString());
-      this.connectMQTT(this.configFile);
+      this.getForm(this.configFile);
+      // this.connectMQTT(this.configFile);
       }
       reader.onerror = (error) => {
       }
