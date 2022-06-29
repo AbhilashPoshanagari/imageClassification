@@ -1,0 +1,34 @@
+<form [formGroup]="myForm" (ngSubmit)="onSubmit">
+    <mat-list-item *ngFor="let control of jsonDynamicForm?.controls">
+      <mat-form-field *ngIf="
+      [
+        'text',
+        'password',
+        'email',
+        'number',
+        'search',
+        'tel',
+        'url'
+      ].includes(control.type);
+    " appearance="fill">
+        <mat-label>{{ control.label }}</mat-label>
+        <input matInput  [type]="control.type"
+      [formControlName]="control.name"
+      [value]="control.value">
+    </mat-form-field>
+        <textarea matInput
+        *ngIf="control.type === 'textarea'"
+        [formControlName]="control.name"
+        [value]="control.value"
+      ></textarea>
+    <mat-slide-toggle *ngIf="control.type === 'toggle'"
+    [formControlName]="control.name"
+    [checked]="control.value"></mat-slide-toggle>
+
+      <mat-radio-button
+      *ngIf="control.type === 'radio'"
+      [formControlName]="control.name"
+      [checked]="control.value"></mat-radio-button>
+  </mat-list-item>
+  <button type="Submit" (click)="onSubmit()">Submit</button>
+</form>

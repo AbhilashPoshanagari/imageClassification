@@ -1,0 +1,65 @@
+{
+"controls": [
+    {
+      "name": "orgId",
+      "label": "ORG Id",
+      "value": "",
+      "type": "text",
+      "validators": {
+        "required": true,
+        "minLength": 10
+      }
+    },
+	{
+      "name": "api_key",
+      "label": "API key",
+      "value": "",
+      "type": "text",
+      "validators": {}
+    },
+	{
+      "name": "auth_token",
+      "label": "Token",
+      "value": "",
+      "type": "text",
+      "validators": {}
+    },
+    {
+      "name": "device_type",
+      "label": "Device Type",
+      "value": "",
+      "type": "text",
+      "validators": {}
+    },
+	{
+      "name": "device_id",
+      "label": "Device Id",
+      "value": "",
+      "type": "text",
+      "validators": {
+        "required": true,
+        "minLength": 10
+      }
+    },
+	{
+      "name": "subscribe_mon",
+      "label": "Device state Topic",
+      "value": "",
+      "type": "text",
+      "validators": {
+        "required": true,
+        "minLength": 50
+      }
+    },
+	{
+      "name": "subscribe_evt",
+      "label": "Device Event Topic",
+      "value": "",
+      "type": "text",
+      "validators": {
+        "required": true,
+        "minLength": 50
+      }
+    }
+	]
+}

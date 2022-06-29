@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import * as mobilenet from '@tensorflow-models/mobilenet';
+import * as tfvis from '@tensorflow/tfjs-vis';
+import * as tf from '@tensorflow/tfjs';
 
 @Component({
   selector: 'app-video',
@@ -14,10 +16,13 @@ export class VideoComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   async ngOnInit() {
+    const surface2 = {name: 'Values Distribution', tab: 'Model Inspection'};
     this.loading = true;
     this.model = await mobilenet.load();
     console.log("model : ",this.model);
     this.loading = false;
+    const testVal = tf.tensor2d([4.4, 2.9, 1.4, 0.2], [1, 4]);
+    tfvis.show.valuesDistribution(surface2, testVal);
   }
 
   async ngAfterViewInit() {

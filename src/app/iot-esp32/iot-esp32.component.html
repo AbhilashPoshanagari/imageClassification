@@ -1,0 +1,37 @@
+<div *ngIf="!isConfigured" class="cont d-flex justify-content-center align-items-center flex-column">
+  <div class="wrap">
+   <div class="search">
+      <input type="file" class="searchTerm" (change)="fileChange($event)">
+      <label class="searchButton">Select IBM config file</label>
+      <div class="wrap2" cdkDrag>
+              <h5>Or</h5>
+        </div>
+  </div>
+</div>
+</div>
+
+<div *ngIf="isConfigured" class="body">
+  <mat-card class="wrap-dashboard">
+    <mat-card-title-group>
+      <mat-card-title>Iot Dashboard</mat-card-title>
+      <mat-card-subtitle>Esp32  -- {{PotentiameterReading}}</mat-card-subtitle>
+      <mat-slide-toggle (click)="onPublish()" [checked]="isChecked"></mat-slide-toggle>
+    </mat-card-title-group>
+    <mat-card-content>        
+    </mat-card-content>
+  </mat-card>
+  </div>
+
+  <div *ngIf="!isConfigured" class="body">
+    <mat-card class="wrap-dashboard">
+      <mat-card-title-group>
+        <mat-card-title>IBM Wotson Iot Form</mat-card-title>
+      </mat-card-title-group>
+      <mat-card-content>
+          <app-json-forms [jsonDynamicForm]="dynamicForm" (formValues)="connectMQTT($event)"></app-json-forms>
+      </mat-card-content>
+    </mat-card>
+    </div>
+    
+
+

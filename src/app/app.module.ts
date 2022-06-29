@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 import {A11yModule} from '@angular/cdk/a11y';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -25,6 +28,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatListModule} from '@angular/material/list';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
@@ -55,6 +59,9 @@ import { HeaderComponent } from './header/header.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { PwaService } from './services/pwa.service';
+import { IotEsp32Component } from './iot-esp32/iot-esp32.component';
+import { GaugeModule } from 'angular-gauge';
+import { JsonFormsComponent } from './json-forms/json-forms.component';
 
 @NgModule({
   declarations: [
@@ -62,12 +69,15 @@ import { PwaService } from './services/pwa.service';
     ImageComponent,
     VideoComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    IotEsp32Component,
+    JsonFormsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     A11yModule,
     ClipboardModule,
     CdkStepperModule,
@@ -90,6 +100,7 @@ import { PwaService } from './services/pwa.service';
     MatGridListModule,
     MatIconModule,
     MatInputModule,
+    MatFormFieldModule,
     MatListModule,
     MatMenuModule,
     MatNativeDateModule,
@@ -113,7 +124,10 @@ import { PwaService } from './services/pwa.service';
     PortalModule,
     ScrollingModule,
     FlexLayoutModule,
-    ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production })
+    GaugeModule.forRoot(),
+    ServiceWorkerModule.register('./ngsw-worker.js', { enabled: environment.production }),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     PwaService

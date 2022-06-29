@@ -1,0 +1,10 @@
+{
+"api_key": "a-w5xjt5-jjw8zicr1p",
+"auth_token": "kOvwvavd++&gKlD0Tm",
+"device_id": "esp32_testing2",
+"device_type": "esp32_Testing",
+"orgId": "w5xjt5",
+"subscribe_evt": "iot-2/type/esp32_Testing/id/esp32_testing2/evt/status/fmt/string",
+"subscribe_mon": "iot-2/type/esp32_Testing/id/esp32_testing2/mon"
+}
+
