@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1657434953481,
+  "timestamp": 1657436283825,
   "index": "https://abhilashposhanagari.github.io/imageClassification/index.html",
   "assetGroups": [
     {
@@ -29,7 +29,6 @@
         "ignoreVary": true
       },
       "urls": [
-        "https://abhilashposhanagari.github.io/imageClassification/assets/IBM_config.json",
         "https://abhilashposhanagari.github.io/imageClassification/assets/icons/icon-128x128.png",
         "https://abhilashposhanagari.github.io/imageClassification/assets/icons/icon-144x144.png",
         "https://abhilashposhanagari.github.io/imageClassification/assets/icons/icon-152x152.png",
@@ -39,7 +38,6 @@
         "https://abhilashposhanagari.github.io/imageClassification/assets/icons/icon-72x72.png",
         "https://abhilashposhanagari.github.io/imageClassification/assets/icons/icon-96x96.png",
         "https://abhilashposhanagari.github.io/imageClassification/assets/iotIBMOrgForm.json",
-        "https://abhilashposhanagari.github.io/imageClassification/assets/iotIBMOrgForm.txt",
         "https://abhilashposhanagari.github.io/imageClassification/assets/my-form.json",
         "https://abhilashposhanagari.github.io/imageClassification/assets/spinners/BeanEater.gif",
         "https://abhilashposhanagari.github.io/imageClassification/assets/spinners/Spinner.gif"
@@ -49,7 +47,6 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "https://abhilashposhanagari.github.io/imageClassification/assets/IBM_config.json": "982e36496de0c22b7f8968d8e2cb3e1f98df2799",
     "https://abhilashposhanagari.github.io/imageClassification/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
     "https://abhilashposhanagari.github.io/imageClassification/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
     "https://abhilashposhanagari.github.io/imageClassification/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
@@ -59,7 +56,6 @@
     "https://abhilashposhanagari.github.io/imageClassification/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "https://abhilashposhanagari.github.io/imageClassification/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "https://abhilashposhanagari.github.io/imageClassification/assets/iotIBMOrgForm.json": "33b5718e908672020c4b704f8fede6a49566da54",
-    "https://abhilashposhanagari.github.io/imageClassification/assets/iotIBMOrgForm.txt": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
     "https://abhilashposhanagari.github.io/imageClassification/assets/my-form.json": "ea467e4af5c40a8803afb88337a37924832bfcb8",
     "https://abhilashposhanagari.github.io/imageClassification/assets/spinners/BeanEater.gif": "65ddfd7d5e5156ab4f487473761d32274c584450",
     "https://abhilashposhanagari.github.io/imageClassification/assets/spinners/Spinner.gif": "44e68b074b323fd268c5dff0f52cf362924ab876",
