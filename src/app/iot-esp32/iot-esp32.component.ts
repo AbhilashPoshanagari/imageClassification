@@ -81,7 +81,7 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
     this.eventTopic = orgConfig.subscribe_evt;
     this.MQTT_CONFIG = {
       host: this.ORG + ".messaging.internetofthings.ibmcloud.com",
-      port: 1883,
+      port: 8883,
       clientId: "a:" + this.ORG + ":" +Math.random().toString(16).substr(2, 8)
     };
     this.loading = true;
@@ -97,7 +97,7 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
         userName: this.username,
         password: this.password,
         keepAliveInterval: 3600,
-        useSSL: false,
+        useSSL: true,
         timeout: 3,
         onSuccess: this.onConnect.bind(this),
         onFailure: this.onFailure.bind(this)});

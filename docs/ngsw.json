@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1656531773193,
+  "timestamp": 1657434953481,
   "index": "https://abhilashposhanagari.github.io/imageClassification/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "https://abhilashposhanagari.github.io/imageClassification/favicon.ico",
         "https://abhilashposhanagari.github.io/imageClassification/index.html",
-        "https://abhilashposhanagari.github.io/imageClassification/main.5d06e3b53756eda92a2e.js",
+        "https://abhilashposhanagari.github.io/imageClassification/main.9b4dc6c1e22a8919e3ac.js",
         "https://abhilashposhanagari.github.io/imageClassification/manifest.webmanifest",
         "https://abhilashposhanagari.github.io/imageClassification/polyfills.e56eaa7548d8a808be86.js",
         "https://abhilashposhanagari.github.io/imageClassification/runtime.e227d1a0e31cbccbf8ec.js",
@@ -29,6 +29,7 @@
         "ignoreVary": true
       },
       "urls": [
+        "https://abhilashposhanagari.github.io/imageClassification/assets/IBM_config.json",
         "https://abhilashposhanagari.github.io/imageClassification/assets/icons/icon-128x128.png",
         "https://abhilashposhanagari.github.io/imageClassification/assets/icons/icon-144x144.png",
         "https://abhilashposhanagari.github.io/imageClassification/assets/icons/icon-152x152.png",
@@ -48,6 +49,7 @@
   ],
   "dataGroups": [],
   "hashTable": {
+    "https://abhilashposhanagari.github.io/imageClassification/assets/IBM_config.json": "982e36496de0c22b7f8968d8e2cb3e1f98df2799",
     "https://abhilashposhanagari.github.io/imageClassification/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
     "https://abhilashposhanagari.github.io/imageClassification/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
     "https://abhilashposhanagari.github.io/imageClassification/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
@@ -62,8 +64,8 @@
     "https://abhilashposhanagari.github.io/imageClassification/assets/spinners/BeanEater.gif": "65ddfd7d5e5156ab4f487473761d32274c584450",
     "https://abhilashposhanagari.github.io/imageClassification/assets/spinners/Spinner.gif": "44e68b074b323fd268c5dff0f52cf362924ab876",
     "https://abhilashposhanagari.github.io/imageClassification/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "https://abhilashposhanagari.github.io/imageClassification/index.html": "0ad7b764a881649523b5596dc25b0d945a648664",
-    "https://abhilashposhanagari.github.io/imageClassification/main.5d06e3b53756eda92a2e.js": "cbd57b94b2ba2091d146d66a718f87118070af90",
+    "https://abhilashposhanagari.github.io/imageClassification/index.html": "dc308325eaa2d772e0c0ecc81fc2518582140b89",
+    "https://abhilashposhanagari.github.io/imageClassification/main.9b4dc6c1e22a8919e3ac.js": "b43ef24297e2f81c71ad6c86b891da568241106f",
     "https://abhilashposhanagari.github.io/imageClassification/manifest.webmanifest": "354a58e3fcddb6eb9b0cd5d331dfa68323907013",
     "https://abhilashposhanagari.github.io/imageClassification/polyfills.e56eaa7548d8a808be86.js": "5175f0f15120a57d8945aadfe1d533dd353d9a2e",
     "https://abhilashposhanagari.github.io/imageClassification/runtime.e227d1a0e31cbccbf8ec.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
