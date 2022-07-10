@@ -53,13 +53,23 @@
     },
 	{
       "name": "subscribe_evt",
-      "label": "Device Event Topic",
+      "label": "Subscribe Topic",
       "value": "",
       "type": "text",
       "validators": {
         "required": true,
         "minLength": 50
       }
-    }
+    },
+    {
+        "name": "publish_evt",
+        "label": "Publish message",
+        "value": "",
+        "type": "text",
+        "validators": {
+          "required": true,
+          "minLength": 50
+        }
+      }
 	]
 }

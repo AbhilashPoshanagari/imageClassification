@@ -11,7 +11,7 @@
         'url'
       ].includes(control.type);
     " appearance="fill">
-        <mat-label>{{ control.label }}</mat-label>
+        <mat-label style="color: #dd5">{{ control.label }}</mat-label>
         <input matInput  [type]="control.type"
       [formControlName]="control.name"
       [value]="control.value">
@@ -30,5 +30,5 @@
       [formControlName]="control.name"
       [checked]="control.value"></mat-radio-button>
   </mat-list-item>
-  <button type="Submit" (click)="onSubmit()">Submit</button>
+  <button mat-raised-button type="Submit" class="submit" (click)="onSubmit()">Submit</button>
 </form>

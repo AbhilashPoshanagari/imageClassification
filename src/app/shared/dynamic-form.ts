@@ -38,5 +38,6 @@ interface JsonFormValidators {
      device_type: string; 
      device_id: string; 
      subscribe_mon: string; 
-     subscribe_evt: string
+     subscribe_evt: string;
+     publish_evt: string;
   }

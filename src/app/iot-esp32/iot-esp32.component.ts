@@ -29,6 +29,7 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
   password: string;
   monTopic: string;
   eventTopic: string;
+  publishTopic: string; 
   mqttClient: any;
   MQTT_CONFIG: {
     host: string,
@@ -40,11 +41,12 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
   PotentiameterReading: any;
   iotForm: FormGroup;
   dynamicForm: any;
-  configFile: any = {};
+  configFile: IBMConfig = {orgId: '', api_key: '', auth_token: '', device_type: '', device_id: '', subscribe_mon: '', subscribe_evt: '', publish_evt: ''};
   isConfigured: boolean = false;
   deviceState: string = '';
-  ibmConfig: IBMConfig = {orgId: '', api_key: '', auth_token: '', device_type: '', device_id: '', subscribe_mon: '', subscribe_evt: ''};
+  ibmConfig: IBMConfig = {orgId: '', api_key: '', auth_token: '', device_type: '', device_id: '', subscribe_mon: '', subscribe_evt: '', publish_evt: ''};
   loading: boolean;
+  infoMessage: string;
   constructor( private ngZone: NgZone,
               private http: HttpClient ) { 
         }
@@ -54,13 +56,13 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.getForm(this.ibmConfig);
+    this.getForm(this.configFile);
   }
 
-  getForm(ibmconfig){
+  getForm(values){
     this.http.get('./assets/iotIBMOrgForm.json').subscribe((res) => {
       this.dynamicForm = res;
-      this.ibmConfig = ibmconfig;
+      this.configFile = values;
     }, err => console.log("Error : ", err));
   }
 
@@ -72,55 +74,62 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
           return;
         }
     }
-    this.ORG = orgConfig.orgId;
-    this.DEVICE_TYPE = orgConfig.device_type;
-    this.DEVICE_ID = orgConfig.device_id;
-    this.username = orgConfig.api_key;
-    this.password = orgConfig.auth_token;
-    this.monTopic = orgConfig.subscribe_mon;
-    this.eventTopic = orgConfig.subscribe_evt;
-    this.MQTT_CONFIG = {
-      host: this.ORG + ".messaging.internetofthings.ibmcloud.com",
-      port: 8883,
-      clientId: "a:" + this.ORG + ":" +Math.random().toString(16).substr(2, 8)
-    };
-    this.loading = true;
-            // Create a client instance
-      this.mqttClient = new Paho.MQTT.Client(this.MQTT_CONFIG.host, Number(this.MQTT_CONFIG.port), this.MQTT_CONFIG.clientId);
-        //Connect Options
-
-        this.mqttClient.onConnectionLost = onConnectionLost;
-        this.mqttClient.onMessageArrived = onMessageArrived;      
-
-        //Creates a new Messaging.Message Object and sends it to the HiveMQ MQTT Broker
-        this.mqttClient.connect({
-        userName: this.username,
-        password: this.password,
-        keepAliveInterval: 3600,
-        useSSL: true,
-        timeout: 3,
-        onSuccess: this.onConnect.bind(this),
-        onFailure: this.onFailure.bind(this)});
-
-        // called when the client loses its connection
-          function onConnectionLost(responseObject) {
-            if (responseObject.errorCode !== 0) {
-              alert("onConnectionLost: "+responseObject.errorMessage);
-            }
-          }
-
-          // called when a message arrives
-          function onMessageArrived(message) {
-            that.ngZone.run(() => {
-              let changeFormat = JSON.parse(message.payloadString);
-              that.PotentiameterReading = parseInt(changeFormat);
-              if(changeFormat && changeFormat['Action']){
-                that.deviceState = changeFormat['Action'];
-                console.log('client connected : ', changeFormat);
-                console.log('client connected : ', that.deviceState);
+    if(!orgConfig.orgId){
+      alert("org Id missing please check");
+      return;
+    }
+    else {
+      this.ORG = orgConfig.orgId;
+      this.DEVICE_TYPE = orgConfig.device_type;
+      this.DEVICE_ID = orgConfig.device_id;
+      this.username = orgConfig.api_key;
+      this.password = orgConfig.auth_token;
+      this.monTopic = orgConfig.subscribe_mon;
+      this.eventTopic = orgConfig.subscribe_evt;
+      this.publishTopic = orgConfig.publish_evt;
+      this.MQTT_CONFIG = {
+        host: this.ORG + ".messaging.internetofthings.ibmcloud.com",
+        port: 8883,
+        clientId: "a:" + this.ORG + ":" +Math.random().toString(16).substr(2, 8)
+      };
+      this.loading = true;
+              // Create a client instance
+        this.mqttClient = new Paho.MQTT.Client(this.MQTT_CONFIG.host, Number(this.MQTT_CONFIG.port), this.MQTT_CONFIG.clientId);
+          //Connect Options
+  
+          this.mqttClient.onConnectionLost = onConnectionLost;
+          this.mqttClient.onMessageArrived = onMessageArrived;      
+  
+          //Creates a new Messaging.Message Object and sends it to the HiveMQ MQTT Broker
+          this.mqttClient.connect({
+          userName: this.username,
+          password: this.password,
+          keepAliveInterval: 3600,
+          useSSL: true,
+          timeout: 3,
+          onSuccess: this.onConnect.bind(this),
+          onFailure: this.onFailure.bind(this)});
+  
+          // called when the client loses its connection
+            function onConnectionLost(responseObject) {
+              if (responseObject.errorCode !== 0) {
+                alert("onConnectionLost: "+responseObject.errorMessage);
               }
-            });
-          }
+            }
+  
+            // called when a message arrives
+            function onMessageArrived(message) {
+              that.ngZone.run(() => {
+                let changeFormat = JSON.parse(message.payloadString);
+                that.PotentiameterReading = parseInt(changeFormat);
+                if(changeFormat && changeFormat['Action']){
+                  that.deviceState = changeFormat['Action'];
+                  console.log('client connected : ', changeFormat);
+                  console.log('client connected : ', that.deviceState);
+                }
+              });
+            }
+    }
   }
   
   onConnect() {
@@ -128,6 +137,7 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
     // console.log("onConnect");
     // this.mqttClient.subscribe("iot-2/evt/status/fmt/string");
     this.isConfigured = true;
+    this.infoMessage = 'Connected';
     this.loading = false;
         this.mqttClient.subscribe(this.monTopic);
         this.mqttClient.subscribe(this.eventTopic);
@@ -136,6 +146,8 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
   onFailure(e) { 
     this.isConfigured = false;
     this.loading = false;
+    this.deviceState = 'Disconnect';
+    this.infoMessage = 'Disconnect';
     console.log("MQTT connection failed at " + Date.now() + "\nerror: " + e.errorCode + " : " + e.errorMessage);
   }
 
@@ -148,7 +160,7 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
         else{
           var message = new Paho.MQTT.Message('1');
         }
-        message.destinationName = "iot-2/type/esp32_Testing/id/esp32_testing2/evt/blink/fmt/string";
+        message.destinationName = this.publishTopic;
         this.mqttClient.send(message);
 
     }
@@ -163,12 +175,38 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
       const reader = new FileReader();
       reader.readAsText(file, "UTF-8");
       reader.onload = (res: any) => {
-      this.configFile = JSON.parse(res.target.result.toString());
-      this.getForm(this.configFile);
-      // this.connectMQTT(this.configFile);
+      let configFile = JSON.parse(res.target.result.toString());
+      setTimeout(() => {
+        this.getForm(configFile);
+      }, 500);
       }
       reader.onerror = (error) => {
       }
+    }
+  }
+
+  isConnected(){
+    const connected = this.mqttClient.isConnected();
+    if(!connected){
+      if(this.configFile.orgId){
+        this.connectMQTT(this.configFile);
+      }
+      else{
+        this.isConfigured = false;
+      }
+    }
+  }
+
+  mqttConnection(){
+    
+  }
+
+  disconnectMQTT(config){
+    if(this.mqttClient.isConnected()){
+      this.mqttClient.disconnect();
+      this.infoMessage = 'Disconnect';
+      this.deviceState = 'Disconnect';
+      this.getForm(config)
     }
   }
 
