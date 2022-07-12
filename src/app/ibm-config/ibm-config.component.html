@@ -1,0 +1,11 @@
+<app-upload-file (sendValues)="valuesFromFile($event)"></app-upload-file>
+<form [formGroup]="ibmForm" (ngSubmit)="onSubmit">
+    <mat-list-item *ngFor="let name of formControllers">
+      <mat-form-field appearance="fill">
+        <mat-label style="color: #dd5">{{ name }}</mat-label>
+        <input matInput 
+      [formControlName]="name">
+    </mat-form-field>
+  </mat-list-item>
+  <button mat-raised-button type="Submit" class="submit" (click)="onSubmit()">Submit</button>
+</form>

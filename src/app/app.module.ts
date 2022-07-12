@@ -62,6 +62,8 @@ import { PwaService } from './services/pwa.service';
 import { IotEsp32Component } from './iot-esp32/iot-esp32.component';
 import { GaugeModule } from 'angular-gauge';
 import { JsonFormsComponent } from './json-forms/json-forms.component';
+import { UploadFileComponent } from './json-forms/upload-file/upload-file.component';
+import { IbmConfigComponent } from './ibm-config/ibm-config.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,9 @@ import { JsonFormsComponent } from './json-forms/json-forms.component';
     HeaderComponent,
     FooterComponent,
     IotEsp32Component,
-    JsonFormsComponent
+    JsonFormsComponent,
+    UploadFileComponent,
+    IbmConfigComponent
   ],
   imports: [
     BrowserModule,

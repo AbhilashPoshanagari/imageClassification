@@ -13,7 +13,7 @@ export class JsonFormsComponent implements OnChanges  {
   @Input() ibmConfig: IBMConfig = {orgId: '', api_key: '', auth_token: '', device_type: '', device_id: '', subscribe_mon: '', subscribe_evt: '', publish_evt: ''};
   @Output()
   formValues: EventEmitter<any> = new EventEmitter<any>();
-  public myForm: FormGroup;
+  public myForm: FormGroup = new FormGroup({});
 
   constructor( private fb: FormBuilder ) { 
     this.myForm = this.fb.group({});
@@ -26,27 +26,18 @@ export class JsonFormsComponent implements OnChanges  {
   }
 
   createForm(controllers){
-    for (let controls of controllers){
+    controllers.forEach(controls => {
+      this.myForm.addControl( controls.name, this.fb.control({value:controls.value, disabled: controls.disabled})); 
+    });
+    // for (let controls of controllers){
+    //   this.myForm.addControl( controls.name, this.fb.control({value:controls.value, disabled: controls.disabled})); 
+    // }
+  }
 
-      // for (const key in  this.ibmConfig) {
-      //  if(key===controls.name){
-      //   this.myForm.addControl( controls.name, this.fb.control(controls.value));
-      //   if(this.ibmConfig[key] !== ''){
-      //     this.myForm.get(controls.name).setValue(this.ibmConfig[key]);
-      //   }
-      //  }
-      // }
-    if(!this.ibmConfig.orgId){
-        this.myForm.addControl( controls.name, this.fb.control({value:controls.value, disabled: controls.disabled})); 
-      }
-      else if(this.ibmConfig.orgId){
-          for (let key in this.ibmConfig) {
-            if(key == controls.name){
-              controls.value = this.ibmConfig[key];
-            }
-          }
-        this.myForm.addControl( controls.name, this.fb.control({value:controls.value, disabled: controls.disabled}));
-        this.myForm.get(controls.name)?.setValue(controls.value);
+  valuesFromFile(values){
+    for (const key in values) {
+      if (Object.prototype.hasOwnProperty.call(values, key)) {
+          this.myForm.get(key)?.setValue(values[key]);
       }
     }
   }

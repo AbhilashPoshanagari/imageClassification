@@ -2,12 +2,12 @@
     <div class="example-button-row" style="margin-left: 30%;">
       <button mat-raised-button (click)="isConnected()" style="margin-left: 5%;">Check MQTT</button>
       <!-- <button mat-raised-button (click)="isConnected()">Check Device</button> -->
-      <button mat-raised-button (click)="disconnectMQTT(configFile)" style="margin-left: 5%;">Disconnect MQTT</button>
+      <button mat-raised-button (click)="disconnectMQTT()" style="margin-left: 5%;">Disconnect MQTT</button>
       <button mat-raised-button style="margin-left: 5%;"> {{infoMessage}} </button>
   </div>
   </section>
 
-<div *ngIf="!isConfigured && !loading" class="cont d-flex justify-content-center align-items-center flex-column">
+<!-- <div *ngIf="!isConfigured && !loading" class="cont d-flex justify-content-center align-items-center flex-column">
   <div class="wrap">
    <div class="search">
       <input type="file" class="searchTerm" (change)="fileChange($event)">
@@ -17,12 +17,12 @@
         </div>
   </div>
 </div>
-</div>
+</div> -->
 
-<div *ngIf="isConfigured" class="body">
+<div *ngIf="isConfigured" cdkDrag>
   <mat-card class="wrap-dashboard">
     <mat-card-title-group>
-      <mat-card-title>IBM Watson Iot Device 
+      <mat-card-title cdkDrag>IBM Watson Iot Device 
         <span *ngIf="deviceState === 'Connect'" class="connected"> {{ deviceState }}</span> 
         <span *ngIf="deviceState === 'Disconnect'" class="disconnected"> {{ deviceState }}</span> <br><br>
         Esp32  -- {{PotentiameterReading}}
@@ -34,25 +34,25 @@
     <mat-card-content>
       <mwl-gauge
       class="two"
-      [max]="4024"
+      [max]="4094"
       [dialStartAngle]="180"
       [dialEndAngle]="0"
       [value]="PotentiameterReading"
       [animated]="true"
-      [animationDuration]="0"
     >
     </mwl-gauge>
     </mat-card-content>
   </mat-card>
   </div>
 
-  <div *ngIf="!isConfigured && !loading" class="body">
+  <div *ngIf="!loading" [hidden]="isConfigured" class="body">
     <mat-card class="wrap-dashboard">
       <mat-card-title-group>
         <mat-card-title>IBM Watson Iot Form</mat-card-title>
       </mat-card-title-group>
       <mat-card-content>
-          <app-json-forms [ibmConfig]="configFile" [jsonDynamicForm]="dynamicForm" (formValues)="connectMQTT($event)"></app-json-forms>
+          <!-- <app-json-forms [jsonDynamicForm]="dynamicForm" (formValues)="connectMQTT($event)"></app-json-forms> -->
+          <app-ibm-config (formValues)="connectMQTT($event)"></app-ibm-config>
       </mat-card-content>
     </mat-card>
     </div>

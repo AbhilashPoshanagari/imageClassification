@@ -56,13 +56,13 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.getForm(this.configFile);
+    this.getForm();
   }
 
-  getForm(values){
+  getForm(){
     this.http.get('./assets/iotIBMOrgForm.json').subscribe((res) => {
       this.dynamicForm = res;
-      this.configFile = values;
+      // this.configFile = values;
     }, err => console.log("Error : ", err));
   }
 
@@ -114,6 +114,7 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
             function onConnectionLost(responseObject) {
               if (responseObject.errorCode !== 0) {
                 alert("onConnectionLost: "+responseObject.errorMessage);
+                this.isConfigured = false;
               }
             }
   
@@ -136,19 +137,22 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
     // Once a connection has been made, make a subscription and send a message.
     // console.log("onConnect");
     // this.mqttClient.subscribe("iot-2/evt/status/fmt/string");
-    this.isConfigured = true;
-    this.infoMessage = 'Connected';
-    this.loading = false;
-        this.mqttClient.subscribe(this.monTopic);
-        this.mqttClient.subscribe(this.eventTopic);
+    this.ngZone.run(() => {
+      this.isConfigured = true;
+      this.infoMessage = 'Connected';
+      this.loading = false;
+          this.mqttClient.subscribe(this.monTopic);
+          this.mqttClient.subscribe(this.eventTopic);
+    });
   }
 
   onFailure(e) { 
-    this.isConfigured = false;
-    this.loading = false;
-    this.deviceState = 'Disconnect';
-    this.infoMessage = 'Disconnect';
-    console.log("MQTT connection failed at " + Date.now() + "\nerror: " + e.errorCode + " : " + e.errorMessage);
+    this.ngZone.run(() => {
+      this.loading = false;
+      this.deviceState = 'Disconnect';
+      this.infoMessage = 'Disconnect';
+      this.isConfigured = false;
+    })
   }
 
   onPublish(ev){
@@ -169,44 +173,47 @@ export class IotEsp32Component implements OnInit, AfterViewInit {
     }
   }
 
-  async fileChange(event) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.readAsText(file, "UTF-8");
-      reader.onload = (res: any) => {
-      let configFile = JSON.parse(res.target.result.toString());
-      setTimeout(() => {
-        this.getForm(configFile);
-      }, 500);
-      }
-      reader.onerror = (error) => {
-      }
-    }
-  }
+  // async fileChange(event) {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.readAsText(file, "UTF-8");
+  //     reader.onload = (res: any) => {
+  //     let configFile = JSON.parse(res.target.result.toString());
+  //     setTimeout(() => {
+  //       // this.getForm(configFile);
+  //     }, 500);
+  //     }
+  //     reader.onerror = (error) => {
+  //     }
+  //   }
+  // }
 
   isConnected(){
-    const connected = this.mqttClient.isConnected();
-    if(!connected){
-      if(this.configFile.orgId){
-        this.connectMQTT(this.configFile);
-      }
-      else{
+    this.ngZone.run(() => {
+      const connected = this.mqttClient.isConnected();
+      if(!connected){
         this.isConfigured = false;
+        // if(this.configFile.orgId){
+        //   this.connectMQTT(this.configFile);
+        // }
+        // else{
+        //   this.isConfigured = false;
+        // }
       }
-    }
+    });
   }
 
   mqttConnection(){
     
   }
 
-  disconnectMQTT(config){
+  disconnectMQTT(){
     if(this.mqttClient.isConnected()){
       this.mqttClient.disconnect();
       this.infoMessage = 'Disconnect';
       this.deviceState = 'Disconnect';
-      this.getForm(config)
+      this.isConfigured = false;
     }
   }
 

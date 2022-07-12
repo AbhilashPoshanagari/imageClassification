@@ -35,7 +35,7 @@ section {
 /*Resize the wrap to see the search bar change!*/
 .wrap-dashboard{
   width: 30%;
-  margin-top: 5%;
+  margin-top: 0%;
   margin-left: 35%;
   margin-bottom: 10%;
   background-color: #34495E;
@@ -46,12 +46,12 @@ section {
   width: 500px;
 }
 .wrap-dashboard2{
-  width: 50%;
-  position: absolute;
-  top: 60%;
-  left: 50%;
+  // width: 50%;
+  position: relative;
+  margin-top: 10%;
+  margin-left: 40%;
   // height: 400px;
-  transform: translate(-50%, -50%);
+  // transform: translate(-50%, -50%);
 }
 .wrap2-dashboard{
   margin-top: 12%;

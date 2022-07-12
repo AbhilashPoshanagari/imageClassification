@@ -1,3 +1,5 @@
+<app-upload-file (sendValues)="valuesFromFile($event)"></app-upload-file>
+
 <form [formGroup]="myForm" (ngSubmit)="onSubmit">
     <mat-list-item *ngFor="let control of jsonDynamicForm?.controls">
       <mat-form-field *ngIf="
